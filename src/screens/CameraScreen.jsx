@@ -39,10 +39,23 @@ const CameraScreen = ({navigation}) => {
             console.log(barcodes);
           }}
         />
-      <Button title="Tirar Foto" onPress={takePicture} />
+        <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
+          <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
+            <Text style={{ fontSize: 14 }}> SNAP </Text>
+          </TouchableOpacity>
+        </View>
     </View>
   );
 };
+
+takePicture = async () => {
+    if (this.camera) {
+      const options = { quality: 0.5, base64: true };
+      const data = await this.camera.takePictureAsync(options);
+      console.log(data.uri);
+    }
+  };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

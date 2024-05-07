@@ -6,18 +6,17 @@ const HomeScreen = ({navigation}) => {
   return (
     <>
     <View style={styles.container}>
-          <Text>Open up App.js to start working on your app!</Text>
+          <Text>Selfie-sh!</Text>
           <StatusBar style="auto" />
       </View><Button
-              title="Go to photo"
-              onPress={() => navigation.navigate('Camera')} /></>
+              title="Tirar foto"
+              onPress={() => navigation.navigate('Camera')} />
+             <Button
+              title="Selecionar arquivo"
+              onPress={() => navigation.navigate('FilePicker')} /></>
   );
 };
 
-export default HomeScreen;
-const ProfileScreen = ({navigation, route}) => {
-  return <Text>This is {route.params.name}'s profile</Text>;
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -27,3 +26,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default HomeScreen;
