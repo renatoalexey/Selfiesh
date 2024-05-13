@@ -1,80 +1,48 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Button, Image } from 'react-native';
+import { StyleSheet, View, Text, Button, Image, TouchableOpacity } from 'react-native';
 import {RNCamera} from 'react-native-camera';
+import * as ImagePicker from 'expo-image-picker';
+{/* import {launchCamera} from 'react-native-image-picker'; */}
 
 const CameraScreen = ({navigation}) => {
   const [image, setImage] = useState(null);
 
-  const takePicture = async () => {
-    try {
-      const photo = await camera.takePictureAsync();
-      setImage(photo.uri);
-    } catch (error) {
-      console.error(error);
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
     }
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <RNCamera
-          ref={ref => {
-            this.camera = ref;
-          }}
-          style={styles.preview}
-          type={RNCamera.Constants.Type.back}
-          flashMode={RNCamera.Constants.FlashMode.on}
-          androidCameraPermissionOptions={{
-            title: 'Permission to use camera',
-            message: 'We need your permission to use your camera',
-            buttonPositive: 'Ok',
-            buttonNegative: 'Cancel',
-          }}
-          androidRecordAudioPermissionOptions={{
-            title: 'Permission to use audio recording',
-            message: 'We need your permission to use your audio',
-            buttonPositive: 'Ok',
-            buttonNegative: 'Cancel',
-          }}
-          onGoogleVisionBarcodesDetected={({ barcodes }) => {
-            console.log(barcodes);
-          }}
-        />
-        <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-          <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
-            <Text style={{ fontSize: 14 }}> SNAP </Text>
-          </TouchableOpacity>
-        </View>
+    <View style={styles.container}>
+      <Button title="Pick an image from camera roll coco" onPress={pickImage} />
+      {image && <Image source={{ uri: image }} style={styles.image} />}
     </View>
+    
   );
 };
 
-takePicture = async () => {
-    if (this.camera) {
-      const options = { quality: 0.5, base64: true };
-      const data = await this.camera.takePictureAsync(options);
-      console.log(data.uri);
-    }
-  };
+
 
 const styles = StyleSheet.create({
-  container: {
+   container: {
     flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'black',
+    alignItems: "center",
+    justifyContent: "center",
   },
-  preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  capture: {
-    flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    padding: 15,
-    paddingHorizontal: 20,
-    alignSelf: 'center',
-    margin: 20,
+  image: {
+    width: 200,
+    height: 200,
   },
 });
 export default CameraScreen;

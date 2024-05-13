@@ -44,7 +44,6 @@ const FilePickerScreen = () => {
         )
       }
      }/>
-     <Button onPress={() => console.log('demonio')} title='teste'></Button>
     </View>
   );
 };
