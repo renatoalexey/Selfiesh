@@ -1,51 +1,41 @@
-import React, { useState } from 'react';
-import { View, Text, Button } from 'react-native';
-import * as ImagePicker from 'react-native-image-picker';
+import { useState } from 'react';
+import { Button, Image, View, StyleSheet } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import {imageMethodSelection} from '../utils/ImageHelper';
+import { useRoute } from '@react-navigation/native';
 
-const FilePickerScreen = () => {
+export default function ImagePickerExample() {
   const [image, setImage] = useState(null);
+  const route = useRoute();
 
-  const selectImage = async () => {
-    try {
- {/*      
-      launchImageLibrary({mediaType: "photo"})
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    
+    let result = await imageMethodSelection(route.name)
 
-      const result = await launchImageLibrary({mediaType: "photo"});
-      if (result.uri) {
-        setImage(result.uri);
-      }*/}
+    console.log(result);
 
-
-    } catch (error) {
-      console.error(error);
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
     }
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      {image && (
-        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-      )}
-      <Button title="Selecionar Arquivo"   onPress={() => {
-        console.log('capeta')
-        console.log('ImagePicker do capeta:' + JSON.stringify(ImagePicker))
-      return ImagePicker.launchImageLibrary(
-       {
-        mediaType: 'photo',
-        includeBase64: false,
-        maxHeight: 200,
-        maxWidth: 200,
-       },
-        response => {
-          console.log('desgraça');
-           console.log(response);
-           setImage(response);
-          },
-        )
-      }
-     }/>
+    <View style={styles.container}>
+      <Button title="Pick an image from camera roll" onPress={pickImage} />
+      {image && <Image source={{ uri: image }} style={styles.image} />}
     </View>
   );
-};
+}
 
-export default FilePickerScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  image: {
+    width: 200,
+    height: 200,
+  },
+});

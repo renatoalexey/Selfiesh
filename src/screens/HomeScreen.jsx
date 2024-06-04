@@ -28,10 +28,14 @@ const HomeScreen = ({navigation}) => {
           <StatusBar style="auto" />
       </View><Button
               title="Tirar foto"
-              onPress={() => navigation.navigate('Camera')} />
+              onPress={() => navigation.navigate('Camera', {
+                method: 'Camera'
+              })}/>
              <Button
               title="Selecionar arquivo"
-              onPress={() => navigation.navigate('FilePicker')} /></>
+              onPress={() => navigation.navigate('Camera', {
+                method: 'File'
+              })} /></>
   );
 };
 
