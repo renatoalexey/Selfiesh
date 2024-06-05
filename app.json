@@ -32,11 +32,17 @@
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
-      ],
+      ],[
         "expo-font",
         {
-          "fonts":["./assets/fonts/Pacifico-Regular.ttf"]
+          "fonts": 
+          [
+            "./assets/fonts/Pacifico-Regular.ttf",
+            "./assets/fonts/VeganStyle.ttf",
+            "./assets/fonts/Inter-Black.otf"
+          ]
         }
+      ]
     ]
   }
 }

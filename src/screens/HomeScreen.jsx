@@ -8,23 +8,26 @@ SplashScreen.preventAutoHideAsync();
 
 const HomeScreen = ({navigation}) => {
   const [fontsLoaded, fontError] = useFonts({
-    'Pacifico': require('../../assets/fonts/Pacifico-Regular.ttf'),
+    'VeganStyle': require('../../assets/fonts/Inter-Black.otf'),
   });
 
   const onLayoutRootView = React.useCallback(async () => {
-    if (fontsLoaded || fontError) {
-      await SplashScreen.hideAsync();
+     if (fontsLoaded || fontError) {
+       await SplashScreen.hideAsync();
+       console.log("dcsdc ###" + fontError)
     }
-  }, [fontsLoaded, fontError]);
+   }, [fontsLoaded, fontError]);
 
-  if (!fontsLoaded && !fontError) {
-    return null;
-  }
+   if (!fontsLoaded && !fontError) {
+     return null;
+    }
+  
 
   return (
     <>
     <View style={styles.container} onLayout={onLayoutRootView}>
-          <Text style={{ fontFamily: 'Pacifico', fontSize: 50, fontWeight: 'italic'}}>Selfie-sh!</Text>
+          <Text style={{ fontSize: 20}}>Bem-vindo ao</Text>
+          <Text style={{ fontFamily: 'Times New Roman', fontSize: 70, fontWeight: 'italic' }}>Selfie-sh!</Text> 
           <StatusBar style="auto" />
       </View><Button
               title="Tirar foto"
@@ -42,7 +45,7 @@ const HomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffebcd',
     alignItems: 'center',
     justifyContent: 'center',
   }

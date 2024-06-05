@@ -28,11 +28,6 @@ const CameraScreen = ({route, navigation}) => {
   const pickImage = async () => {
   console.log("Route ###" + JSON.stringify(route));
     // No permissions request is necessary for launching the image library
-    const imageParameters = {mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    }
 
     const result = await imageMethodSelection(method);
 
@@ -49,13 +44,13 @@ const CameraScreen = ({route, navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
+    <><View style={styles.container}>
       {image && <><Image source={{ uri: image }} style={styles.image} />
-      <Text>{avaliation}</Text></>
-      }
-      <Button title={buttonLabel} onPress={pickImage} />
-    </View>
-    
+        <View>
+          <Text>A avaliação da sua foto é</Text>
+          <Text style={{ fontSize: 20, color: avaliation == "Boa" ? 'green' : 'red' }}>{avaliation}</Text>
+        </View></>}
+    </View><Button title={buttonLabel} onPress={pickImage} /></>
   );
 };
 
@@ -66,6 +61,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: '#ffebcd',
   },
   image: {
     width: 200,
