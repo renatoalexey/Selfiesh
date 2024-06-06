@@ -7,20 +7,20 @@ import * as SplashScreen from 'expo-splash-screen';
 SplashScreen.preventAutoHideAsync();
 
 const HomeScreen = ({navigation}) => {
-  const [fontsLoaded, fontError] = useFonts({
-    'VeganStyle': require('../../assets/fonts/Inter-Black.otf'),
-  });
+  // const [fontsLoaded, fontError] = useFonts({
+  //   'Pacifico': require('../../assets/fonts/Pacifico-Regular.ttf'),
+  // });
 
-  const onLayoutRootView = React.useCallback(async () => {
-     if (fontsLoaded || fontError) {
-       await SplashScreen.hideAsync();
-       console.log("dcsdc ###" + fontError)
-    }
-   }, [fontsLoaded, fontError]);
+  // const onLayoutRootView = React.useCallback(async () => {
+  //    if (fontsLoaded || fontError) {
+  //      await SplashScreen.hideAsync();
+  //      console.log("dcsdc ###" + fontError)
+  //   }
+  //  }, [fontsLoaded, fontError]);
 
-   if (!fontsLoaded && !fontError) {
-     return null;
-    }
+  //  if (!fontsLoaded && !fontError) {
+  //    return null;
+  //   }
   
 
   return (
